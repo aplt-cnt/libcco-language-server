@@ -1,0 +1,19 @@
+# Build output
+target/
+*.exe
+
+# Node
+client/node_modules/
+client/out/
+client/server/cco-lsp.exe
+client/cco-language-support-*.vsix
+
+# IDE
+.vscode/
+*.suo
+*.user
+*.sln.docstates
+
+# OS
+.DS_Store
+Thumbs.db
