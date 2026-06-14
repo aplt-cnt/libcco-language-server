@@ -1,0 +1,104 @@
+{
+    "name": "CCO",
+    "scopeName": "source.cco",
+    "fileTypes": ["cco"],
+    "patterns": [
+        { "include": "#comments" },
+        { "include": "#dollar-keywords" },
+        { "include": "#types" },
+        { "include": "#template-instantiation" },
+        { "include": "#literals" },
+        { "include": "#identifiers" },
+        { "include": "#operators" },
+        { "include": "#punctuation" }
+    ],
+    "repository": {
+        "comments": {
+            "patterns": [
+                {
+                    "begin": "/\\*",
+                    "end": "\\*/",
+                    "name": "comment.block.cco"
+                }
+            ]
+        },
+        "dollar-keywords": {
+            "match": "(\\$)(typedef|enum|temp|function|default|return|this|format)\\b",
+            "captures": {
+                "1": { "name": "punctuation.definition.keyword.cco" },
+                "2": { "name": "keyword.declaration.cco" }
+            }
+        },
+        "types": {
+            "match": "\\b(String|Integer|Float|Boolean|Array|dyn)\\b",
+            "name": "keyword.type.cco"
+        },
+        "template-instantiation": {
+            "patterns": [
+                {
+                    "match": "(#)([A-Za-z_]\\w*)",
+                    "captures": {
+                        "1": { "name": "punctuation.definition.template.cco" },
+                        "2": { "name": "entity.name.type.cco" }
+                    }
+                },
+                {
+                    "match": "(\\.)([A-Za-z_]\\w*)(?=\\s*:)",
+                    "captures": {
+                        "1": { "name": "punctuation.separator.dot.cco" },
+                        "2": { "name": "variable.object.field.cco" }
+                    }
+                }
+            ]
+        },
+        "literals": {
+            "patterns": [
+                {
+                    "match": "\\b(true|false|None)\\b",
+                    "name": "constant.language.cco"
+                },
+                {
+                    "begin": "\"",
+                    "end": "\"",
+                    "name": "string.quoted.double.cco",
+                    "patterns": [
+                        { "match": "\\\\[nrt\\\\\"'xX0]", "name": "constant.character.escape.cco" },
+                        { "match": "\\\\u[0-9a-fA-F]{4}", "name": "constant.character.escape.cco" }
+                    ]
+                },
+                {
+                    "begin": "`",
+                    "end": "`",
+                    "name": "string.quoted.raw.cco"
+                },
+                {
+                    "match": "\\b(0[xX][0-9a-fA-F](_?[0-9a-fA-F])*|0[oO][0-7](_?[0-7])*|0[bB][01](_?[01])*)\\b",
+                    "name": "constant.numeric.integer.cco"
+                },
+                {
+                    "match": "\\b[0-9](_?[0-9])*(\\.[0-9](_?[0-9])*)?([eE][+-]?[0-9](_?[0-9])*)?\\b",
+                    "name": "constant.numeric.cco"
+                }
+            ]
+        },
+        "identifiers": {
+            "match": "\\b([A-Za-z_]\\w*)\\b",
+            "name": "variable.other.cco"
+        },
+        "operators": {
+            "match": "(\\+|-|\\*|/|==|!=|<=|>=|<|>|&&|\\|\\||!|\\||->)",
+            "name": "keyword.operator.cco"
+        },
+        "punctuation": {
+            "patterns": [
+                { "match": ",", "name": "punctuation.separator.comma.cco" },
+                { "match": ":", "name": "punctuation.separator.colon.cco" },
+                { "match": "=", "name": "keyword.operator.assignment.cco" },
+                { "match": "\\(", "name": "punctuation.section.parens.begin.cco" },
+                { "match": "\\)", "name": "punctuation.section.parens.end.cco" },
+                { "match": "\\.", "name": "punctuation.separator.dot.cco" },
+                { "match": "@", "name": "punctuation.definition.annotation.cco" }
+            ]
+        }
+    }
+}

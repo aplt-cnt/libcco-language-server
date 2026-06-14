@@ -1,0 +1,70 @@
+{
+    "name": "cco-language-support",
+    "displayName": "CCO Language Support",
+    "description": "Language support for CCO (CNT Configuration Object) files — syntax highlighting, error reporting, completions, and more",
+    "version": "0.1.0",
+    "publisher": "aplt-cnt",
+    "license": "GPL-3.0",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/aplt-cnt/libcco-language-server"
+    },
+    "engines": {
+        "vscode": "^1.75.0"
+    },
+    "categories": [
+        "Programming Languages",
+        "Linters"
+    ],
+    "keywords": [
+        "cco",
+        "configuration",
+        "language-server"
+    ],
+    "activationEvents": [
+        "onLanguage:cco"
+    ],
+    "main": "./out/extension.js",
+    "contributes": {
+        "languages": [
+            {
+                "id": "cco",
+                "aliases": [
+                    "CCO",
+                    "cco"
+                ],
+                "extensions": [
+                    ".cco"
+                ],
+                "configuration": "./language-configuration.json"
+            }
+        ],
+        "grammars": [
+            {
+                "language": "cco",
+                "scopeName": "source.cco",
+                "path": "./syntaxes/cco.tmLanguage.json"
+            }
+        ],
+        "commands": [
+            {
+                "command": "cco.showSymbols",
+                "title": "CCO: Show Document Symbols"
+            }
+        ]
+    },
+    "scripts": {
+        "vscode:prepublish": "tsc -p ./tsconfig.json",
+        "compile": "tsc -p ./tsconfig.json",
+        "watch": "tsc -watch -p ./tsconfig.json"
+    },
+    "dependencies": {
+        "vscode-languageclient": "^9.0.1"
+    },
+    "devDependencies": {
+        "@types/node": "^20.0.0",
+        "@types/vscode": "^1.75.0",
+        "@vscode/vsce": "^3.2.1",
+        "typescript": "^5.0.0"
+    }
+}
