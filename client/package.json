@@ -1,7 +1,7 @@
 {
     "name": "cco-language-server",
     "displayName": "CCO Language",
-    "icon": "icon.svg",
+    "icon": "icon.png",
     "description": "Language support for CCO (CNT Configuration Object) files — syntax highlighting, error reporting, completions, and more",
     "version": "0.1.0",
     "publisher": "aplt-cnt",
