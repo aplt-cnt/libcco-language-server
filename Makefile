@@ -9,7 +9,7 @@ SERVER_BIN   := $(BUILD_DIR)/cco-lsp
 
 CLIENT_DIR   := client
 EXTENSION_JS := $(CLIENT_DIR)/out/extension.js
-VSIX         := $(CLIENT_DIR)/cco-language-support-*.vsix
+VSIX_PATTERN := $(CLIENT_DIR)/cco-language-server-*.vsix
 
 CMAKE        := cmake
 NPM          := npm
@@ -46,7 +46,7 @@ SERVER_BIN_FULL := $(BUILD_DIR)/$(CONFIG_DIR)/cco-lsp$(EXE)
 SERVER_BIN_COPY := $(CLIENT_DIR)/server/cco-lsp$(EXE)
 
 # ---- Targets -----------------------------------------------------------
-.PHONY: all lib server extension package install test clean
+.PHONY: all lib server extension package install test clean distclean help
 
 all: lib server extension
 
@@ -77,7 +77,7 @@ $(EXTENSION_JS): $(CLIENT_DIR)/src/*.ts $(CLIENT_DIR)/tsconfig.json
 # ---- Copy binary + package VSIX ----------------------------------------
 package: $(SERVER_BIN_COPY) extension
 	cd $(CLIENT_DIR) && $(NPX) vsce package
-	@echo "  VSIX    $(VSIX)"
+	@echo "  VSIX    $(VSIX_PATTERN)"
 
 $(SERVER_BIN_COPY): $(SERVER_BIN_FULL)
 	$(MKDIR) $(CLIENT_DIR)/server
@@ -86,7 +86,7 @@ $(SERVER_BIN_COPY): $(SERVER_BIN_FULL)
 
 # ---- Install extension to VS Code --------------------------------------
 install: package
-	code --install-extension $(CLIENT_DIR)/cco-language-support-*.vsix --force
+	code --install-extension "$(shell ls $(VSIX_PATTERN) 2>$(NULL) | head -1)" --force
 	@echo "  INSTALL done"
 
 # ---- Test LSP server ---------------------------------------------------
@@ -113,8 +113,7 @@ clean:
 distclean: clean
 	-$(RM) -r $(BUILD_DIR)
 	-$(RM) -r $(CCO_BUILD)
-	-$(RM) $(CLIENT_DIR)/node_modules/.package-lock.json
-	-$(RM) $(CLIENT_DIR)/cco-language-support-*.vsix
+	-$(RM) $(CLIENT_DIR)/cco-language-server-*.vsix
 
 # ---- Phony -------------------------------------------------------------
 help:
