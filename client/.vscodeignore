@@ -5,5 +5,6 @@
 !out/**
 !server/**
 !syntaxes/**
+!README.md
 !language-configuration.json
 !package.json
